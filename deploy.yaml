@@ -12,7 +12,7 @@ jobs:
 
 - name: deployTest
   deploy:
-    contract: AdoptionTest.sol
+    contract: Adoption.sol
     instance: TestAdoption
     data:
     - $deployAdoption
