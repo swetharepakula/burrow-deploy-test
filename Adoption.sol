@@ -1,18 +1,23 @@
 pragma solidity ^0.5.0;
 
 contract Adoption {
-  
-  address[16] public adopters;
-
-  function adopt(uint petId) public returns (uint) {
-    require(petId >= 0 && petId <= 15);
-    adopters[petId] = msg.sender;
-    
-    return petId;
-  }
-
-  // Retrieving the adopters
-  function getAdopters() public view returns (address[16] memory) {
-    return adopters;
+  address public adopters;
+  function adopt() public {
+    adopters = msg.sender;
   }
 }
+
+contract TestAdoption {
+  event TestEvent(bool indexed name, string message);
+   Adoption adoption;
+   constructor(Adoption _adoption) public {
+     adoption = _adoption;
+   }
+
+  // Testing the adopt() function
+  function testGetAdopterAddressByPetId() public returns (address result) {
+    adoption.adopt();
+    return adoption.adopters();
+  }
+}
+
